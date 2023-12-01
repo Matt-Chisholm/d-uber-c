@@ -1,17 +1,38 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import { Provider } from "react-redux";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import "react-native-gesture-handler";
 import store from "./store";
 import HomeScreen from "./screens/HomeScreen";
+import MapScreen from "./screens/MapScreen";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
 	return (
-		<Provider store={store}>
-			<View>
-				<HomeScreen />
+		<NavigationContainer>
+			<Provider store={store}>
+				<Stack.Navigator>
+					<Stack.Screen
+						name='HomeScreen'
+						component={HomeScreen}
+						options={{
+							headerShown: false,
+						}}
+					/>
+					<Stack.Screen
+						name='MapScreen'
+						component={MapScreen}
+						options={{
+							headerShown: false,
+						}}
+					/>
+				</Stack.Navigator>
 				<StatusBar style='auto' />
-			</View>
-		</Provider>
+			</Provider>
+		</NavigationContainer>
 	);
 }
 

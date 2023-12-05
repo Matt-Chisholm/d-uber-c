@@ -21,6 +21,8 @@ const HomeScreen = () => {
 				/>
 				<GooglePlacesAutocomplete
 					placeholder='Where From?'
+					enablePoweredByContainer={false}
+					minLength={2}
 					styles={{
 						container: {
 							flex: 0,
@@ -31,6 +33,7 @@ const HomeScreen = () => {
 					}}
 					nearbyPlacesAPI='GooglePlacesSearch'
 					debounce={400}
+					returnKeyType={"search"}
 					onPress={(data, details = null) => {
 						// 'details' is provided when fetchDetails = true
 						console.log(data, details);

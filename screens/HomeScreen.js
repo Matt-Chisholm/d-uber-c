@@ -6,7 +6,6 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 import { GOOGLE_MAPS_API_KEY } from "@env";
 
 const HomeScreen = () => {
-	console.log(GooglePlacesAutoComplete);
 	return (
 		<SafeAreaView style={tw`bg-white h-full`}>
 			<View style={tw`p-5`}>
@@ -21,12 +20,21 @@ const HomeScreen = () => {
 					}}
 				/>
 				<GooglePlacesAutocomplete
-					placeholder='Search'
+					placeholder='Where From?'
+					styles={{
+						container: {
+							flex: 0,
+						},
+						textInput: {
+							fontSize: 18,
+						},
+					}}
+					nearbyPlacesAPI='GooglePlacesSearch'
+					debounce={400}
 					onPress={(data, details = null) => {
 						// 'details' is provided when fetchDetails = true
 						console.log(data, details);
 					}}
-					onFail={(error) => console.error(error)}
 					query={{
 						key: GOOGLE_MAPS_API_KEY,
 						language: "en",

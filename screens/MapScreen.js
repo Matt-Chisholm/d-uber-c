@@ -1,34 +1,38 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import Mapview, { Marker } from "react-native-maps";
-import tw from "tailwind-react-native-classnames";
-import { useSelector } from "react-redux";
+import tw, { create } from "tailwind-react-native-classnames";
+import Map from "../components/Map";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import NavigateCard from "../components/NavigateCard";
+import RideOptionsCard from "../components/RideOptionsCard";
 
 const MapScreen = () => {
-	const origin = useSelector((state) => state.nav.origin);
+	const Stack = createNativeStackNavigator();
 
 	return (
-		<Mapview
-			style={{ height: "50%", width: "100%" }}
-			mapType='mutedStandard'
-			initialRegion={{
-				latitude: origin.location.lat,
-				longitude: origin.location.lng,
-				latitudeDelta: 0.005,
-				longitudeDelta: 0.005,
-			}}>
-			{origin?.location && (
-				<Marker
-					coordinate={{
-						latitude: origin.location.lat,
-						longitude: origin.location.lng,
-					}}
-					title='Origin'
-					description={origin.description}
-					identifier='origin'
-				/>
-			)}
-		</Mapview>
+		<View>
+			<View style={tw`h-1/2`}>
+				<Map />
+			</View>
+			<View style={tw`h-1/2`}>
+				<Stack.Navigator>
+					<Stack.Screen
+						name='NavigateCard'
+						component={NavigateCard}
+						options={{
+							headerShown: false,
+						}}
+					/>
+					<Stack.Screen
+						name='RideOptionsCard'
+						component={RideOptionsCard}
+						options={{
+							headerShown: false,
+						}}
+					/>
+				</Stack.Navigator>
+			</View>
+		</View>
 	);
 };
 

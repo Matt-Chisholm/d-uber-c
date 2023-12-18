@@ -40,9 +40,6 @@ const HomeScreen = () => {
 					debounce={400}
 					returnKeyType={"search"}
 					onPress={(data, details = null) => {
-						// 'details' is provided when fetchDetails = true
-						// console.log("Data: ", data);
-						// console.log("Details: ", details);
 						dispatch(
 							setOrigin({
 								location: details.geometry.location,
